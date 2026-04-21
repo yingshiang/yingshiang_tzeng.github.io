@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sean Tzeng — Consultant & Project Manager</title>
+  <meta name="description" content="Sean Tzeng — MSc student at ESCP Business School. Consultant & Project Manager specialising in digital strategy, AI transformation, and market analytics." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { navy:'#0F172A', accent:'#2563EB', 'accent-light':'#EFF6FF' }, fontFamily:{ sans:['"Inter"','sans-serif'] } } }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif}
+    .fi{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .fi.up{opacity:1;transform:translateY(0)}
+    .fi-d1{transition-delay:.1s}.fi-d2{transition-delay:.2s}.fi-d3{transition-delay:.3s}.fi-d4{transition-delay:.4s}
+    .nav-link{position:relative}
+    .nav-link::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:#2563EB;transition:width .25s}
+    .nav-link:hover::after{width:100%}
+    .grad-text{background:linear-gradient(135deg,#2563EB,#0EA5E9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;pointer-events:none}
+    .svc-card{transition:transform .2s,box-shadow .2s}
+    .svc-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(37,99,235,.12)}
+    .proj-card{transition:transform .2s,box-shadow .2s}
+    .proj-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.1)}
+
+    /* Language switcher */
+    .lang-btn{font-size:.72rem;font-weight:600;color:#94A3B8;background:none;border:none;cursor:pointer;padding:3px 6px;border-radius:6px;transition:color .15s,background .15s}
+    .lang-btn:hover{color:#475569;background:#F1F5F9}
+    .lang-btn.active{color:#2563EB;background:#EFF6FF}
+
+    /* Chatbot */
+    #chat-btn{position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#2563EB,#0EA5E9);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 24px rgba(37,99,235,.4);transition:transform .2s}
+    #chat-btn:hover{transform:scale(1.08)}
+    #chat-btn svg{color:#fff;width:26px;height:26px}
+    #chat-badge{position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:#EF4444;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700}
+    #chat-window{position:fixed;bottom:96px;right:28px;z-index:998;width:360px;max-height:520px;background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.18);display:flex;flex-direction:column;overflow:hidden;transform:scale(.85) translateY(20px);opacity:0;pointer-events:none;transition:transform .25s,opacity .25s;transform-origin:bottom right}
+    #chat-window.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+    #chat-header{background:linear-gradient(135deg,#1D4ED8,#0EA5E9);padding:16px 18px;display:flex;align-items:center;gap:12px}
+    #chat-header .avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:14px;overflow:hidden;flex-shrink:0}
+    #chat-header .avatar img{width:100%;height:100%;object-fit:cover}
+    #chat-header .info .name{color:#fff;font-weight:600;font-size:.9rem}
+    #chat-header .info .status{color:rgba(255,255,255,.8);font-size:.72rem;display:flex;align-items:center;gap:4px}
+    #chat-header .status-dot{width:7px;height:7px;background:#4ADE80;border-radius:50%;flex-shrink:0}
+    #close-chat{margin-left:auto;background:none;border:none;color:#fff;cursor:pointer;opacity:.7;line-height:1;font-size:20px}
+    #close-chat:hover{opacity:1}
+    #chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+    #chat-body::-webkit-scrollbar{width:4px}
+    #chat-body::-webkit-scrollbar-track{background:#f1f5f9}
+    #chat-body::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}
+    .msg{max-width:82%;font-size:.82rem;line-height:1.55;padding:9px 13px;border-radius:14px}
+    .msg.bot{background:#F1F5F9;color:#1E293B;border-bottom-left-radius:4px}
+    .msg.user{background:linear-gradient(135deg,#2563EB,#0EA5E9);color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+    .typing-dots{display:flex;gap:5px;padding:10px 14px;background:#F1F5F9;border-radius:14px;border-bottom-left-radius:4px;width:fit-content}
+    .typing-dots span{width:7px;height:7px;border-radius:50%;background:#94A3B8;animation:bounce .9s infinite}
+    .typing-dots span:nth-child(2){animation-delay:.15s}.typing-dots span:nth-child(3){animation-delay:.3s}
+    @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+    .quick-chips{display:flex;flex-wrap:wrap;gap:6px;padding:4px 16px 8px}
+    .chip{background:#EFF6FF;color:#2563EB;border:1px solid #BFDBFE;padding:5px 11px;border-radius:99px;font-size:.72rem;cursor:pointer;transition:background .15s;font-weight:500}
+    .chip:hover{background:#DBEAFE}
+    #chat-input-row{display:flex;gap:8px;padding:10px 14px 14px;border-top:1px solid #F1F5F9}
+    #chat-input{flex:1;border:1px solid #E2E8F0;border-radius:99px;padding:8px 14px;font-size:.82rem;outline:none;font-family:inherit}
+    #chat-input:focus{border-color:#2563EB}
+    #chat-send{background:linear-gradient(135deg,#2563EB,#0EA5E9);border:none;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+    #chat-send:hover{opacity:.9}
+    #chat-send svg{color:#fff;width:16px;height:16px}
+    @media(max-width:420px){#chat-window{width:calc(100vw - 24px);right:12px;bottom:84px}}
+  </style>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+
+<!-- NAV -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 transition-shadow duration-300">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+    <a href="#hero" class="flex items-center gap-2.5 flex-shrink-0">
+      <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-sm overflow-hidden">
+        <img src="photo.jpg" class="w-full h-full object-cover object-top" onerror="this.style.display='none';this.parentNode.textContent='ST'" />
+      </div>
+      <span class="font-semibold text-slate-900 text-sm tracking-tight">Sean Tzeng</span>
+    </a>
+    <div class="hidden md:flex items-center gap-6 text-[0.8rem] text-slate-500 font-medium">
+      <a href="#services"   class="nav-link hover:text-slate-900 transition-colors" data-i18n="nav_services">Services</a>
+      <a href="#experience" class="nav-link hover:text-slate-900 transition-colors" data-i18n="nav_experience">Experience</a>
+      <a href="#projects"   class="nav-link hover:text-slate-900 transition-colors" data-i18n="nav_projects">Projects</a>
+      <a href="#education"  class="nav-link hover:text-slate-900 transition-colors" data-i18n="nav_education">Education</a>
+      <a href="#contact"    class="nav-link hover:text-slate-900 transition-colors" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <!-- Language switcher -->
+      <div class="flex items-center gap-0.5">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <span class="text-slate-300 text-xs select-none">|</span>
+        <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">中文</button>
+        <span class="text-slate-300 text-xs select-none">|</span>
+        <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+      </div>
+      <a href="#contact" class="text-sm bg-accent text-white px-4 py-2 rounded-full font-medium hover:bg-blue-700 transition-colors shadow-sm" data-i18n="nav_hire">Hire Me</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+  <div class="hero-blob w-[500px] h-[500px] bg-blue-500 top-[-100px] right-[-100px]"></div>
+  <div class="hero-blob w-[300px] h-[300px] bg-sky-400 bottom-0 left-[-80px]"></div>
+
+  <div class="max-w-6xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+    <div class="fi">
+      <div class="flex flex-wrap gap-2 mb-6">
+        <span class="inline-flex items-center gap-1.5 text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full">
+          <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+          <span data-i18n="badge_open">Open to Work</span>
+        </span>
+        <span class="text-xs font-medium bg-slate-100 text-slate-600 px-3 py-1 rounded-full" data-i18n="badge_location">📍 Madrid, Spain</span>
+        <span class="text-xs font-medium bg-slate-100 text-slate-600 px-3 py-1 rounded-full" data-i18n="badge_remote">🌐 Remote Friendly</span>
+      </div>
+
+      <h1 class="text-5xl lg:text-[3.4rem] font-extrabold text-slate-900 leading-[1.12] mb-5 tracking-tight">
+        <span data-i18n="hero_line1">Consultant &</span><br/>
+        <span class="grad-text" data-i18n="hero_line2">Project Manager</span>
+      </h1>
+
+      <p class="text-slate-500 text-lg leading-relaxed mb-8 max-w-[480px]" data-i18n-html="hero_desc">
+        MSc student at <strong class="text-slate-700">ESCP Business School</strong> (Madrid). I help organisations turn strategy into action — from GTM planning to AI transformation.
+      </p>
+
+      <div class="flex flex-wrap gap-3 mb-10">
+        <a href="#projects" class="bg-accent text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-md" data-i18n="hero_cta1">View Projects</a>
+        <a href="#contact"  class="border border-slate-300 text-slate-700 px-6 py-3 rounded-full font-semibold hover:border-accent hover:text-accent transition-colors" data-i18n="hero_cta2">Get in Touch</a>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-5 text-sm">
+        <div class="text-center">
+          <div class="text-2xl font-extrabold text-slate-900">3+</div>
+          <div class="text-slate-400 text-xs" data-i18n-html="stat1_label">Years Project<br/>Experience</div>
+        </div>
+        <div class="w-px h-10 bg-slate-200"></div>
+        <div class="text-center">
+          <div class="text-2xl font-extrabold text-slate-900">5+</div>
+          <div class="text-slate-400 text-xs" data-i18n-html="stat2_label">Live Consulting<br/>Projects</div>
+        </div>
+        <div class="w-px h-10 bg-slate-200"></div>
+        <div class="text-center">
+          <div class="text-2xl font-extrabold text-slate-900">5+</div>
+          <div class="text-slate-400 text-xs" data-i18n-html="stat3_label">Companies<br/>Worked With</div>
+        </div>
+        <div class="w-px h-10 bg-slate-200"></div>
+        <div class="text-center">
+          <div class="text-2xl font-extrabold text-slate-900">5+</div>
+          <div class="text-slate-400 text-xs" data-i18n-html="stat4_label">Industries<br/>Covered</div>
+        </div>
+        <div class="w-px h-10 bg-slate-200"></div>
+        <div class="text-center">
+          <div class="text-slate-400 text-xs leading-relaxed" data-i18n-html="stat5_label">Clients from<br/><span class="font-semibold text-slate-600">APAC · EMEA · AMER</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo -->
+    <div class="fi fi-d2 flex justify-center lg:justify-end">
+      <div class="relative">
+        <div class="w-72 h-80 rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-gradient-to-br from-blue-50 to-sky-100">
+          <img src="photo.jpg" alt="Sean Tzeng" class="w-full h-full object-cover object-top" onerror="this.style.display='none'" />
+        </div>
+        <div class="absolute -top-4 -left-4 bg-white rounded-2xl shadow-xl px-4 py-2.5 border border-slate-100 flex items-center gap-2 text-sm">
+          <span class="text-xl">🎓</span>
+          <div>
+            <div class="font-semibold text-slate-800 text-xs leading-tight">ESCP Business School</div>
+            <div class="text-slate-400 text-[10px]">Top 4 EU · FT Ranked</div>
+          </div>
+        </div>
+        <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl px-4 py-2.5 border border-slate-100 text-sm">
+          <div class="font-semibold text-slate-800 text-xs">🇹🇼 Taiwan · 🇪🇸 Spain</div>
+          <div class="text-slate-400 text-[10px]">Trilingual</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-400 text-xs">
+    <span data-i18n="scroll_hint">Scroll to explore</span>
+    <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="py-24 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fi mb-14">
+      <span class="text-xs font-semibold uppercase tracking-widest text-accent" data-i18n="svc_label">What I Offer</span>
+      <h2 class="text-4xl font-bold text-slate-900 mt-2" data-i18n="svc_title">Services</h2>
+      <p class="text-slate-500 mt-3 max-w-lg" data-i18n="svc_desc">Bridging strategy and execution across four core practice areas.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="fi fi-d1 svc-card bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-2xl mb-4">🎯</div>
+        <h3 class="font-semibold text-slate-900 mb-2" data-i18n="svc1_title">GTM & Business Strategy</h3>
+        <p class="text-slate-500 text-sm leading-relaxed" data-i18n="svc1_desc">ICP scoping, go-to-market planning, competitive positioning, and financial modelling.</p>
+      </div>
+      <div class="fi fi-d2 svc-card bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-sky-50 flex items-center justify-center text-2xl mb-4">📊</div>
+        <h3 class="font-semibold text-slate-900 mb-2" data-i18n="svc2_title">Data Analytics & Reporting</h3>
+        <p class="text-slate-500 text-sm leading-relaxed" data-i18n="svc2_desc">Power BI and Tableau dashboards, KPI tracking, multi-wave market research synthesis.</p>
+      </div>
+      <div class="fi fi-d3 svc-card bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-purple-50 flex items-center justify-center text-2xl mb-4">🤖</div>
+        <h3 class="font-semibold text-slate-900 mb-2" data-i18n="svc3_title">AI & Digital Transformation</h3>
+        <p class="text-slate-500 text-sm leading-relaxed" data-i18n="svc3_desc">AI agent strategy, workflow automation blueprints, and technology implementation roadmaps.</p>
+      </div>
+      <div class="fi fi-d4 svc-card bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl mb-4">🛠️</div>
+        <h3 class="font-semibold text-slate-900 mb-2" data-i18n="svc4_title">Project Management</h3>
+        <p class="text-slate-500 text-sm leading-relaxed" data-i18n="svc4_desc">Cross-functional coordination, CRM pipeline management, Jira/Gantter project delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fi mb-14">
+      <span class="text-xs font-semibold uppercase tracking-widest text-accent" data-i18n="exp_label">Where I've Worked</span>
+      <h2 class="text-4xl font-bold text-slate-900 mt-2" data-i18n="exp_title">Work Experience</h2>
+    </div>
+    <div class="space-y-6">
+
+      <!-- Superlaty -->
+      <div class="fi bg-white border border-slate-100 rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
+              <img src="logo-superlaty.png" alt="Superlaty" class="w-full h-full object-contain p-1" onerror="this.parentElement.innerHTML='🚀'" />
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg">Junior Project Manager</h3>
+              <p class="text-accent font-medium text-sm">Superlaty · Taipei, Taiwan</p>
+            </div>
+          </div>
+          <span class="text-xs font-medium bg-slate-100 text-slate-500 px-3 py-1.5 rounded-full self-start whitespace-nowrap">Sep 2024 – Jun 2025</span>
+        </div>
+        <ul class="space-y-2 text-slate-600 text-sm">
+          <li class="flex gap-2"><span class="text-accent mt-0.5 flex-shrink-0">▸</span>Scoped ICPs and blockchain-enabled membership use cases across three industries to prioritise early GTM efforts.</li>
+          <li class="flex gap-2"><span class="text-accent mt-0.5 flex-shrink-0">▸</span>Built and managed a <strong>Salesforce pipeline of 250 qualified leads and 30+ active opportunities</strong> across Taiwan, Singapore, and Malaysia, supporting outreach, demos, and weekly reporting.</li>
+          <li class="flex gap-2"><span class="text-accent mt-0.5 flex-shrink-0">▸</span>Developed 5 core GTM materials and coordinated cross-functional stakeholders to support early rollout.</li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">Salesforce CRM</span>
+          <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">GTM Strategy</span>
+          <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">Pipeline Management</span>
+          <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">Blockchain</span>
+        </div>
+      </div>
+
+      <!-- Ipsos -->
+      <div class="fi bg-white border border-slate-100 rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
+              <img src="logo-ipsos.png" alt="Ipsos" class="w-full h-full object-contain p-1" onerror="this.parentElement.innerHTML='🔬'" />
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg">Strategic Consulting Intern</h3>
+              <p class="text-indigo-600 font-medium text-sm">Ipsos · Taipei, Taiwan</p>
+            </div>
+          </div>
+          <span class="text-xs font-medium bg-slate-100 text-slate-500 px-3 py-1.5 rounded-full self-start whitespace-nowrap">Sep 2024 – Mar 2025</span>
+        </div>
+        <ul class="space-y-2 text-slate-600 text-sm">
+          <li class="flex gap-2"><span class="text-indigo-400 mt-0.5 flex-shrink-0">▸</span>Structured survey frameworks and consolidated <strong>4–6 data sources into analysis-ready tables covering 10,000+ responses</strong> across healthcare market tracking and pricing studies.</li>
+          <li class="flex gap-2"><span class="text-indigo-400 mt-0.5 flex-shrink-0">▸</span>Built an Excel and <strong>Power BI model</strong> for bi-weekly KPI tracking and multi-wave reporting.</li>
+          <li class="flex gap-2"><span class="text-indigo-400 mt-0.5 flex-shrink-0">▸</span>Synthesised insights across 5+ market segments into client-ready reports and strategic recommendations.</li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full font-medium">Power BI</span>
+          <span class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full font-medium">Market Research</span>
+          <span class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full font-medium">Healthcare Analytics</span>
+          <span class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-full font-medium">Survey Design</span>
+        </div>
+      </div>
+
+      <!-- BenQ -->
+      <div class="fi bg-white border border-slate-100 rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
+              <img src="logo-benq.png" alt="BenQ" class="w-full h-full object-contain p-1" onerror="this.parentElement.innerHTML='📱'" />
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-lg">Digital Marketing Intern</h3>
+              <p class="text-orange-600 font-medium text-sm">BenQ · Taipei, Taiwan</p>
+            </div>
+          </div>
+          <span class="text-xs font-medium bg-slate-100 text-slate-500 px-3 py-1.5 rounded-full self-start whitespace-nowrap">Nov 2023 – May 2024</span>
+        </div>
+        <ul class="space-y-2 text-slate-600 text-sm">
+          <li class="flex gap-2"><span class="text-orange-400 mt-0.5 flex-shrink-0">▸</span>Executed US/UK KOL campaigns for XL2586X and U2 gaming monitors — top collaboration generated <strong>270,071 views, ~150 purchases, 66% engagement, and 960 link clicks.</strong></li>
+          <li class="flex gap-2"><span class="text-orange-400 mt-0.5 flex-shrink-0">▸</span>Managed influencer pipeline using Salesforce CRM, UTM tracking, and Google Analytics to monitor performance and optimise traffic and conversion.</li>
+          <li class="flex gap-2"><span class="text-orange-400 mt-0.5 flex-shrink-0">▸</span>Developed creator selection criteria, product messaging, and content plans for <strong>5+ esports marketing projects</strong> across monitor and mouse launches.</li>
+        </ul>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="text-xs bg-orange-50 text-orange-700 px-2.5 py-1 rounded-full font-medium">Google Analytics</span>
+          <span class="text-xs bg-orange-50 text-orange-700 px-2.5 py-1 rounded-full font-medium">Influencer Marketing</span>
+          <span class="text-xs bg-orange-50 text-orange-700 px-2.5 py-1 rounded-full font-medium">UTM Tracking</span>
+          <span class="text-xs bg-orange-50 text-orange-700 px-2.5 py-1 rounded-full font-medium">Esports</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Other activities -->
+    <div class="fi mt-6 bg-slate-50 rounded-2xl p-6 border border-slate-100">
+      <h4 class="font-semibold text-slate-700 mb-3 text-sm uppercase tracking-wide" data-i18n="exp_other_title">Other Activities</h4>
+      <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-600">
+        <div class="flex gap-3 items-start">
+          <span class="text-lg flex-shrink-0">🏄</span>
+          <div>
+            <div class="font-medium text-slate-800">Waiao Beach Spring High & Swelleye National Cleanup</div>
+            <div class="text-slate-500 text-xs mt-0.5">Event Management · 300-attendee event · Mar–Apr 2024</div>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start">
+          <span class="text-lg flex-shrink-0">🍕</span>
+          <div>
+            <div class="font-medium text-slate-800">Drifters Pizza Pub — Restaurant Management</div>
+            <div class="text-slate-500 text-xs mt-0.5">+10% sales growth, +20% seasonal traffic · Jun 2022–Jun 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-24 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fi mb-14">
+      <span class="text-xs font-semibold uppercase tracking-widest text-accent" data-i18n="proj_label">Consulting Work</span>
+      <h2 class="text-4xl font-bold text-slate-900 mt-2" data-i18n="proj_title">Projects</h2>
+      <p class="text-slate-500 mt-3" data-i18n="proj_desc">Live consulting mandates delivered at ESCP Business School with real clients.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- Inditex -->
+      <div class="fi fi-d1 proj-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm cursor-pointer" onclick="openProj(0)">
+        <div class="h-48 relative overflow-hidden">
+          <img src="proj-inditex.jpg" alt="Inditex project" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent flex items-end p-4">
+            <span class="text-white text-xs font-bold uppercase tracking-widest opacity-90">Inditex</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex gap-2 mb-3">
+            <span class="text-xs bg-violet-50 text-violet-700 px-2.5 py-1 rounded-full font-medium">AI Strategy</span>
+            <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full">Apr–Jun 2026</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-lg mb-2">AI Agent Strategy for In-Store Operations</h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-4">AI agent recommendations for in-store decision-making with a full implementation blueprint covering priority use cases, tools, and API architecture.</p>
+          <span class="text-accent text-sm font-semibold hover:underline" data-i18n="proj_read">Read more →</span>
+        </div>
+      </div>
+
+      <!-- Salesforce x EasyFly -->
+      <div class="fi fi-d2 proj-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm cursor-pointer" onclick="openProj(1)">
+        <div class="h-48 relative overflow-hidden">
+          <img src="proj-salesforce.jpg" alt="Salesforce project" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent flex items-end p-4">
+            <span class="text-white text-xs font-bold uppercase tracking-widest opacity-90">Salesforce × EasyFly</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex gap-2 mb-3">
+            <span class="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-medium">Digital Transformation</span>
+            <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full">Jan–Mar 2026</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-lg mb-2">Digital Transformation Strategy for a European Airline</h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-4">Agentforce-based strategy projecting <strong>€147M (+18%) operating profit uplift</strong> through a 12-month phased Salesforce implementation roadmap.</p>
+          <span class="text-accent text-sm font-semibold hover:underline" data-i18n="proj_read">Read more →</span>
+        </div>
+      </div>
+
+      <!-- Telefónica -->
+      <div class="fi fi-d3 proj-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm cursor-pointer" onclick="openProj(2)">
+        <div class="h-48 relative overflow-hidden">
+          <img src="proj-telefonica.jpg" alt="Telefónica project" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent flex items-end p-4">
+            <span class="text-white text-xs font-bold uppercase tracking-widest opacity-90">Telefónica</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex gap-2 mb-3">
+            <span class="text-xs bg-teal-50 text-teal-700 px-2.5 py-1 rounded-full font-medium">GTM Strategy</span>
+            <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full">Oct–Dec 2025</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-lg mb-2">Open Gateway GTM Strategy — Airline Industry</h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-4">Use cases and financial model using Telefónica Open Gateway APIs to reduce airline fraud and increase revenue through carrier billing and location APIs.</p>
+          <span class="text-accent text-sm font-semibold hover:underline" data-i18n="proj_read">Read more →</span>
+        </div>
+      </div>
+
+      <!-- MedRen -->
+      <div class="fi fi-d4 proj-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm cursor-pointer" onclick="openProj(3)">
+        <div class="h-48 relative overflow-hidden">
+          <img src="proj-medren.jpg" alt="MedRen project" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent flex items-end p-4">
+            <span class="text-white text-xs font-bold uppercase tracking-widest opacity-90">MedRen</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex gap-2 mb-3">
+            <span class="text-xs bg-rose-50 text-rose-700 px-2.5 py-1 rounded-full font-medium">Automation & PE</span>
+            <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full">Mar–Jul 2026</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-lg mb-2">GP Operations Automation — Energy Private Equity</h3>
+          <p class="text-slate-500 text-sm leading-relaxed mb-4">Mapped workflow inefficiencies across an energy PE fund and developed a prioritised roadmap for automation opportunities and tokenisation feasibility.</p>
+          <span class="text-accent text-sm font-semibold hover:underline" data-i18n="proj_read">Read more →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fi mb-14">
+      <span class="text-xs font-semibold uppercase tracking-widest text-accent" data-i18n="edu_label">Academic Background</span>
+      <h2 class="text-4xl font-bold text-slate-900 mt-2" data-i18n="edu_title">Education</h2>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-8 mb-8">
+
+      <!-- ESCP -->
+      <div class="fi bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-7 text-white shadow-xl relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500 rounded-full opacity-10 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="relative z-10">
+          <div class="flex items-start gap-4 mb-5">
+            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
+              <img src="logo-escp.jpg" alt="ESCP" class="w-full h-full object-contain p-1" onerror="this.parentElement.innerHTML='🎓'" />
+            </div>
+            <div>
+              <h3 class="font-bold text-white text-lg leading-tight">MSc in Digital Project Management & Consulting</h3>
+              <p class="text-blue-300 font-medium text-sm mt-1">ESCP Business School</p>
+              <p class="text-white/50 text-xs mt-0.5">Madrid & Berlin · Sep 2025 – Dec 2026</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3 mb-5">
+            <div class="bg-white/8 rounded-xl p-3">
+              <div class="text-2xl font-extrabold text-white">3.8</div>
+              <div class="text-white/50 text-xs mt-0.5">GPA / 4.0</div>
+            </div>
+            <div class="bg-white/8 rounded-xl p-3">
+              <div class="text-sm font-bold text-white">Top 4</div>
+              <div class="text-white/50 text-xs mt-0.5">European B-School (FT)</div>
+            </div>
+          </div>
+          <ul class="space-y-2 text-sm text-white/70">
+            <li class="flex gap-2 items-start"><span class="text-blue-400 mt-0.5 flex-shrink-0">★</span>Silicon Valley Seminar — Salesforce, UC Berkeley & Stanford</li>
+            <li class="flex gap-2 items-start"><span class="text-blue-400 mt-0.5 flex-shrink-0">★</span>AWS Madrid Visit (Selected · Top 25 from cohort)</li>
+            <li class="flex gap-2 items-start"><span class="text-blue-400 mt-0.5 flex-shrink-0">★</span>ESCP–Sussex Virtual Collaboration Certificate (Dec 2025)</li>
+            <li class="flex gap-2 items-start"><span class="text-blue-400 mt-0.5 flex-shrink-0">★</span>Thesis: <em>"How AI Reshapes Tasks, Talent Strategy & Skill Priorities for Junior Consultants"</em></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Soochow -->
+      <div class="fi fi-d2 bg-white border border-slate-100 rounded-2xl p-7 shadow-sm">
+        <div class="flex items-start gap-4 mb-5">
+          <div class="w-12 h-12 rounded-xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
+              <img src="logo-soochow.jpg" alt="Soochow University" class="w-full h-full object-contain p-1" onerror="this.parentElement.innerHTML='📚'" />
+            </div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-lg leading-tight">Bachelor of Business Administration</h3>
+            <p class="text-accent font-medium text-sm mt-1">Soochow University</p>
+            <p class="text-slate-400 text-xs mt-0.5">Taipei, Taiwan · Sep 2020 – Jun 2024</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <div class="bg-slate-50 rounded-xl p-3">
+            <div class="text-2xl font-extrabold text-slate-900">3.7</div>
+            <div class="text-slate-400 text-xs mt-0.5">GPA / 4.0 (Top 10%)</div>
+          </div>
+          <div class="bg-slate-50 rounded-xl p-3">
+            <div class="text-sm font-bold text-slate-800">Team Captain</div>
+            <div class="text-slate-400 text-xs mt-0.5">Football & Volleyball</div>
+          </div>
+        </div>
+        <ul class="space-y-2 text-sm text-slate-600">
+          <li class="flex gap-2 items-start"><span class="text-accent mt-0.5 flex-shrink-0">▸</span>Top-10% academic ranking throughout all four years</li>
+          <li class="flex gap-2 items-start"><span class="text-accent mt-0.5 flex-shrink-0">▸</span>Football team captain — UFA 4th place; volleyball captain — UFA 3rd place</li>
+          <li class="flex gap-2 items-start"><span class="text-accent mt-0.5 flex-shrink-0">▸</span>National football team player (U15–U18)</li>
+        </ul>
+        <div class="mt-5 pt-4 border-t border-slate-100">
+          <div class="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3" data-i18n="edu_lang_title">Language Certifications</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-green-50 text-green-700 border border-green-200 px-2.5 py-1 rounded-full font-medium">IELTS 7.5</span>
+            <span class="text-xs bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-full font-medium">TOEIC 940</span>
+            <span class="text-xs bg-orange-50 text-orange-700 border border-orange-200 px-2.5 py-1 rounded-full font-medium">Spanish A2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="py-24 bg-slate-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fi mb-14">
+      <span class="text-xs font-semibold uppercase tracking-widest text-accent" data-i18n="skills_label">Toolkit</span>
+      <h2 class="text-4xl font-bold text-slate-900 mt-2" data-i18n="skills_title">Skills & Tools</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="fi bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <h4 class="font-semibold text-slate-700 mb-4 text-sm uppercase tracking-wide" data-i18n="skills_analytics">Analytics & BI</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full font-medium">Power BI</span>
+          <span class="text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full font-medium">Tableau</span>
+          <span class="text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full font-medium">Google Analytics</span>
+          <span class="text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full font-medium">Excel (Advanced)</span>
+        </div>
+      </div>
+      <div class="fi fi-d1 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <h4 class="font-semibold text-slate-700 mb-4 text-sm uppercase tracking-wide" data-i18n="skills_project">Project & CRM</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full font-medium">Salesforce CRM</span>
+          <span class="text-sm bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full font-medium">Jira</span>
+          <span class="text-sm bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full font-medium">Gantter</span>
+          <span class="text-sm bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full font-medium">MS Office</span>
+        </div>
+      </div>
+      <div class="fi fi-d2 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <h4 class="font-semibold text-slate-700 mb-4 text-sm uppercase tracking-wide" data-i18n="skills_core">Core Expertise</h4>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-sm bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full font-medium">GTM Strategy</span>
+          <span class="text-sm bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full font-medium">Market Research</span>
+          <span class="text-sm bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full font-medium">AI Strategy</span>
+          <span class="text-sm bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full font-medium">Digital Transformation</span>
+          <span class="text-sm bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full font-medium">Financial Modelling</span>
+        </div>
+      </div>
+    </div>
+    <!-- Languages -->
+    <div class="fi mt-6 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+      <h4 class="font-semibold text-slate-700 mb-5 text-sm uppercase tracking-wide" data-i18n="skills_languages">Languages</h4>
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="font-medium text-slate-800" data-i18n="lang_zh_name">Mandarin Chinese</span>
+            <span class="text-slate-400" data-i18n="lang_zh_level">Native</span>
+          </div>
+          <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-accent to-sky-400 rounded-full" style="width:100%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="font-medium text-slate-800" data-i18n="lang_en_name">English</span>
+            <span class="text-slate-400 text-xs" data-i18n="lang_en_level">Professional (IELTS 7.5)</span>
+          </div>
+          <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-accent to-sky-400 rounded-full" style="width:90%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="font-medium text-slate-800" data-i18n="lang_es_name">Spanish</span>
+            <span class="text-slate-400" data-i18n="lang_es_level">Beginner (A2)</span>
+          </div>
+          <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-accent to-sky-400 rounded-full" style="width:22%"></div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Hobbies -->
+    <div class="fi mt-6 bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+      <h4 class="font-semibold text-slate-700 mb-4 text-sm uppercase tracking-wide" data-i18n="skills_beyond">Beyond Work</h4>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <span class="flex items-center gap-2 bg-sky-50 text-sky-700 px-3 py-1.5 rounded-full">🏄 Surfing</span>
+        <span class="flex items-center gap-2 bg-green-50 text-green-700 px-3 py-1.5 rounded-full">⚽ Football (U15–18 National Team)</span>
+        <span class="flex items-center gap-2 bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full">🎒 Backpacking</span>
+        <span class="flex items-center gap-2 bg-pink-50 text-pink-700 px-3 py-1.5 rounded-full">✏️ Drawing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="fi mb-14 text-center">
+      <span class="text-xs font-semibold uppercase tracking-widest text-accent" data-i18n="contact_label">Let's Connect</span>
+      <h2 class="text-4xl font-bold text-slate-900 mt-2" data-i18n="contact_title">Get in Touch</h2>
+      <p class="text-slate-500 mt-3 max-w-md mx-auto" data-i18n="contact_desc">Open to consulting mandates, freelance projects, and collaboration opportunities.</p>
+    </div>
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div class="fi space-y-4">
+        <a href="mailto:stzeng2010@gmail.com" class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl hover:bg-blue-50 group transition-colors border border-transparent hover:border-blue-100">
+          <div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-sm text-xl flex-shrink-0">📧</div>
+          <div>
+            <div class="text-xs text-slate-400 font-medium uppercase tracking-wide" data-i18n="contact_email_label">Email</div>
+            <div class="font-semibold text-slate-800 group-hover:text-accent transition-colors">stzeng2010@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/yingshiang-tzeng" target="_blank" rel="noopener" class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl hover:bg-blue-50 group transition-colors border border-transparent hover:border-blue-100">
+          <div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-sm text-xl flex-shrink-0">💼</div>
+          <div>
+            <div class="text-xs text-slate-400 font-medium uppercase tracking-wide" data-i18n="contact_li_label">LinkedIn</div>
+            <div class="font-semibold text-slate-800 group-hover:text-accent transition-colors">linkedin.com/in/yingshiang-tzeng</div>
+          </div>
+        </a>
+        <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl">
+          <div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-sm text-xl flex-shrink-0">📍</div>
+          <div>
+            <div class="text-xs text-slate-400 font-medium uppercase tracking-wide" data-i18n="contact_loc_label">Location</div>
+            <div class="font-semibold text-slate-800" data-i18n="contact_loc_val">Madrid, Spain · Remote Available</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl">
+          <div class="w-11 h-11 bg-white rounded-xl flex items-center justify-center shadow-sm text-xl flex-shrink-0">📞</div>
+          <div>
+            <div class="text-xs text-slate-400 font-medium uppercase tracking-wide" data-i18n="contact_phone_label">Phone</div>
+            <div class="font-semibold text-slate-800">(+34) 610-830-326</div>
+          </div>
+        </div>
+        <div class="bg-gradient-to-br from-blue-600 to-sky-500 rounded-2xl p-5 text-white">
+          <div class="text-sm font-semibold mb-1" data-i18n="chatbot_cta_title">💬 Have a question?</div>
+          <p class="text-white/80 text-sm" data-i18n="chatbot_cta_desc">Use the AI chat widget (bottom-right) to ask anything about my background, skills, or availability — available 24/7.</p>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="fi fi-d2 bg-slate-50 rounded-2xl p-8 border border-slate-100">
+        <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5" data-i18n="form_name">Name</label>
+              <input type="text" required placeholder="Jane Smith" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent text-sm transition" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5" data-i18n="form_company">Company</label>
+              <input type="text" placeholder="Acme Corp" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent text-sm transition" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5" data-i18n="form_email">Email</label>
+            <input type="email" required placeholder="you@company.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent text-sm transition" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5" data-i18n="form_type">Type of Engagement</label>
+            <select class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent text-sm text-slate-700 transition">
+              <option>GTM & Business Strategy</option>
+              <option>Data Analytics & Reporting</option>
+              <option>AI & Digital Transformation</option>
+              <option>Project Management</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5" data-i18n="form_msg">Message</label>
+            <textarea rows="4" required placeholder="Tell me about your project..." class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent text-sm transition resize-none"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-accent text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors text-sm shadow-md" data-i18n="form_send">Send Message</button>
+        </form>
+        <div id="formSuccess" class="hidden text-center py-10">
+          <div class="text-4xl mb-3">✅</div>
+          <div class="font-bold text-slate-900" data-i18n="form_ok_title">Message sent!</div>
+          <div class="text-slate-500 text-sm mt-1" data-i18n="form_ok_desc">I'll reply within 1–2 business days.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-slate-100 py-8 bg-white">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+    <span data-i18n="footer_copy">© 2026 Ying-Shiang (Sean) Tzeng · Madrid, Spain</span>
+    <div class="flex gap-6">
+      <a href="mailto:stzeng2010@gmail.com" class="hover:text-accent transition-colors">Email</a>
+      <a href="https://linkedin.com/in/yingshiang-tzeng" class="hover:text-accent transition-colors">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<!-- PROJECT MODAL -->
+<div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4" onclick="closeModal(event)">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+  <div class="relative bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
+    <button onclick="closeModal(null,true)" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 text-2xl leading-none">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<div id="chat-btn" onclick="toggleChat()">
+  <div id="chat-badge">1</div>
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+</div>
+<div id="chat-window">
+  <div id="chat-header">
+    <div class="avatar"><img src="photo.jpg" onerror="this.parentNode.textContent='ST'" /></div>
+    <div class="info">
+      <div class="name">Sean's AI Assistant</div>
+      <div class="status" id="chat-status"><span class="status-dot"></span> Online · Ask me anything</div>
+    </div>
+    <button id="close-chat" onclick="toggleChat()">&times;</button>
+  </div>
+  <div id="chat-body"></div>
+  <div class="quick-chips" id="quick-chips"></div>
+  <div id="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Ask about Sean…" onkeydown="if(event.key==='Enter')sendMsg()" />
+    <button id="chat-send" onclick="sendMsg()">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+/* ── Scroll fade-in ── */
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('up'); }), {threshold:0.1});
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('shadow-md', scrollY > 10));
+
+/* ── Contact form ── */
+function handleFormSubmit(e) {
+  e.preventDefault();
+  document.getElementById('contactForm').classList.add('hidden');
+  document.getElementById('formSuccess').classList.remove('hidden');
+}
+
+/* ── Projects ── */
+const projects = [
+  { img:'proj-inditex.jpg', tag:'AI Strategy', client:'Inditex', period:'Apr – Jun 2026',
+    title:'AI Agent Strategy for In-Store Operations',
+    challenge:'Inditex needed to evaluate how AI agents could improve real-time in-store decision-making across their global retail operations.',
+    deliverables:['Identified and prioritised AI agent use cases for inventory management, staff allocation, and customer service routing','Defined implementation blueprint: priority use cases, tools, architecture, and API requirements across key operational data sources','Mapped integration touchpoints between existing store systems and proposed AI layer'],
+    outcome:'A boardroom-ready strategy deck and phased implementation roadmap for AI-assisted in-store operations.' },
+  { img:'proj-salesforce.jpg', tag:'Digital Transformation', client:'Salesforce × EasyFly', period:'Jan – Mar 2026',
+    title:'Digital Transformation Strategy for a European Airline',
+    challenge:'EasyFly faced low margins, 15% churn, and 2.5M monthly service requests — the challenge was to design a scalable digital-first strategy that grows revenue without scaling call-centre costs.',
+    deliverables:['Designed a multi-agent Agentforce architecture (Demand, Revenue, Service, Ops, Sales, Retention Agents) across the full passenger journey','Built a financial model projecting €147M (+18%) operating profit uplift — €78.3M revenue uplift + €69.1M cost savings/year','Created a 12-month phased roadmap across Sales Cloud, Service Cloud, Marketing Cloud, Commerce Cloud & Data Cloud','Developed Tableau governance framework for SLA tracking and real-time operational insight'],
+    outcome:'Projected ROI of 12.4× on a €10–12M Year-1 investment based on Forrester TEI benchmarks.' },
+  { img:'proj-telefonica.jpg', tag:'GTM Strategy', client:'Telefónica', period:'Oct – Dec 2025',
+    title:'Open Gateway GTM Strategy — Airline Industry',
+    challenge:"Telefónica's Open Gateway APIs needed a clear B2B commercial strategy targeting the airline sector, covering both fraud prevention and revenue growth use cases.",
+    deliverables:['Developed 3 use cases: identity security (login/profile), payment fraud prevention, and carrier billing / location-based revenue','Built a risk-tiered API recommendation framework for each passenger journey touchpoint','Created a B2B pricing model benchmarked vs Google Maps API, IPinfo, Stripe, Adyen','Segmented target airlines by digital maturity × passenger volume to identify priority commercial targets'],
+    outcome:'A complete GTM deck presented to Telefónica stakeholders, with a revenue model showing 20% of fraud-saved value as Telefónica revenue.' },
+  { img:'proj-medren.jpg', tag:'Process Automation', client:'MedRen (Energy PE Fund)', period:'Mar – Jul 2026',
+    title:'GP Operations Automation — Energy Private Equity',
+    challenge:'MedRen, an energy-sector private equity fund, had significant manual inefficiencies in their GP operations slowing deal execution and reporting.',
+    deliverables:['Mapped end-to-end GP workflow to identify automation opportunities across deal tracking, reporting, LP communication, and data aggregation','Assessed tokenisation feasibility for fund assets and LP interests','Developed a prioritised automation roadmap with effort-impact matrix and tooling recommendations'],
+    outcome:'A structured roadmap enabling the fund to reduce manual work hours and evaluate blockchain-based tokenisation as a next step.' },
+];
+
+function openProj(i) {
+  const p = projects[i];
+  document.getElementById('modalContent').innerHTML = `
+    <div class="h-28 rounded-2xl overflow-hidden mb-5 relative"><img src="${p.img}" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-black/30"></div></div>
+    <span class="inline-block text-xs font-semibold bg-slate-100 text-slate-600 px-3 py-1 rounded-full mb-3">${p.tag} · ${p.period}</span>
+    <div class="text-xs text-slate-400 font-medium mb-1">${p.client}</div>
+    <h3 class="text-xl font-bold text-slate-900 mb-4">${p.title}</h3>
+    <div class="mb-4"><div class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Challenge</div><p class="text-sm text-slate-600 leading-relaxed">${p.challenge}</p></div>
+    <div class="mb-4"><div class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Key Deliverables</div><ul class="space-y-2">${p.deliverables.map(d=>`<li class="flex gap-2 text-sm text-slate-600"><span class="text-accent mt-0.5 flex-shrink-0">▸</span>${d}</li>`).join('')}</ul></div>
+    <div class="bg-blue-50 rounded-xl p-4"><div class="text-xs font-bold text-accent uppercase tracking-wide mb-1">Outcome</div><p class="text-sm text-slate-700">${p.outcome}</p></div>`;
+  const m = document.getElementById('modal');
+  m.classList.remove('hidden'); m.classList.add('flex');
+}
+function closeModal(e, force) {
+  if (force || (e && e.target === document.getElementById('modal'))) {
+    const m = document.getElementById('modal');
+    m.classList.add('hidden'); m.classList.remove('flex');
+  }
+}
+
+/* ══════════════════ i18n ══════════════════ */
+const T = {
+  en: {
+    nav_services:'Services', nav_experience:'Experience', nav_projects:'Projects', nav_education:'Education', nav_contact:'Contact', nav_hire:'Hire Me',
+    badge_open:'Open to Work', badge_location:'📍 Madrid, Spain', badge_remote:'🌐 Remote Friendly',
+    hero_line1:'Consultant &', hero_line2:'Project Manager',
+    hero_desc:'MSc student at <strong class="text-slate-700">ESCP Business School</strong> (Madrid). I help organisations turn strategy into action — from GTM planning to AI transformation.',
+    hero_cta1:'View Projects', hero_cta2:'Get in Touch',
+    stat1_label:'Years Project<br/>Experience', stat2_label:'Live Consulting<br/>Projects', stat3_label:'Companies<br/>Worked With', stat4_label:'Industries<br/>Covered', stat5_label:'Clients from<br/><span class="font-semibold text-slate-600">APAC · EMEA · AMER</span>',
+    scroll_hint:'Scroll to explore',
+    svc_label:'What I Offer', svc_title:'Services', svc_desc:'Bridging strategy and execution across four core practice areas.',
+    svc1_title:'GTM & Business Strategy', svc1_desc:'ICP scoping, go-to-market planning, competitive positioning, and financial modelling.',
+    svc2_title:'Data Analytics & Reporting', svc2_desc:'Power BI and Tableau dashboards, KPI tracking, multi-wave market research synthesis.',
+    svc3_title:'AI & Digital Transformation', svc3_desc:'AI agent strategy, workflow automation blueprints, and technology implementation roadmaps.',
+    svc4_title:'Project Management', svc4_desc:'Cross-functional coordination, CRM pipeline management, Jira/Gantter project delivery.',
+    exp_label:"Where I've Worked", exp_title:'Work Experience', exp_other_title:'Other Activities',
+    proj_label:'Consulting Work', proj_title:'Projects', proj_desc:'Live consulting mandates delivered at ESCP Business School with real clients.', proj_read:'Read more →',
+    edu_label:'Academic Background', edu_title:'Education', edu_lang_title:'Language Certifications',
+    skills_label:'Toolkit', skills_title:'Skills & Tools', skills_analytics:'Analytics & BI', skills_project:'Project & CRM', skills_core:'Core Expertise', skills_languages:'Languages', skills_beyond:'Beyond Work',
+    lang_zh_name:'Mandarin Chinese', lang_zh_level:'Native', lang_en_name:'English', lang_en_level:'Professional (IELTS 7.5)', lang_es_name:'Spanish', lang_es_level:'Beginner (A2)',
+    contact_label:"Let's Connect", contact_title:'Get in Touch', contact_desc:'Open to consulting mandates, freelance projects, and collaboration opportunities.',
+    contact_email_label:'Email', contact_li_label:'LinkedIn', contact_loc_label:'Location', contact_loc_val:'Madrid, Spain · Remote Available', contact_phone_label:'Phone',
+    chatbot_cta_title:'💬 Have a question?', chatbot_cta_desc:'Use the AI chat widget (bottom-right) to ask anything about my background, skills, or availability — available 24/7.',
+    form_name:'Name', form_company:'Company', form_email:'Email', form_type:'Type of Engagement', form_msg:'Message', form_send:'Send Message', form_ok_title:'Message sent!', form_ok_desc:"I'll reply within 1–2 business days.",
+    footer_copy:'© 2026 Ying-Shiang (Sean) Tzeng · Madrid, Spain',
+    chat_status:'Online · Ask me anything', chat_placeholder:'Ask about Sean…',
+  },
+  zh: {
+    nav_services:'服務項目', nav_experience:'工作經歷', nav_projects:'諮詢專案', nav_education:'學歷', nav_contact:'聯絡我', nav_hire:'合作洽詢',
+    badge_open:'歡迎合作', badge_location:'📍 馬德里，西班牙', badge_remote:'🌐 可遠端工作',
+    hero_line1:'顧問 &', hero_line2:'專案經理',
+    hero_desc:'目前就讀 <strong class="text-slate-700">ESCP 商學院</strong>（馬德里）碩士班。協助企業將策略落地執行——從市場進入規劃到 AI 數位轉型。',
+    hero_cta1:'查看專案', hero_cta2:'聯絡我',
+    stat1_label:'年以上專案<br/>實務經驗', stat2_label:'實際諮詢<br/>專案數', stat3_label:'合作過的<br/>企業數', stat4_label:'涵蓋<br/>產業數', stat5_label:'服務客戶遍及<br/><span class="font-semibold text-slate-600">APAC · EMEA · AMER</span>',
+    scroll_hint:'向下捲動探索',
+    svc_label:'服務項目', svc_title:'我能提供什麼', svc_desc:'橫跨四大核心領域，連結策略規劃與落地執行。',
+    svc1_title:'市場進入 & 商業策略', svc1_desc:'ICP 定位、市場進入規劃、競爭分析與財務模型建立。',
+    svc2_title:'數據分析 & 報告', svc2_desc:'Power BI 與 Tableau 儀表板、KPI 追蹤、多波次市場研究整合。',
+    svc3_title:'AI & 數位轉型', svc3_desc:'AI Agent 策略、流程自動化藍圖與數位技術導入路線圖。',
+    svc4_title:'專案管理', svc4_desc:'跨部門協調、CRM 業務管理、Jira/Gantter 專案交付。',
+    exp_label:'工作經歷', exp_title:'職涯歷程', exp_other_title:'其他活動',
+    proj_label:'諮詢案例', proj_title:'專案作品', proj_desc:'在 ESCP 商學院與真實客戶共同完成的顧問委託案。', proj_read:'查看詳情 →',
+    edu_label:'學術背景', edu_title:'教育經歷', edu_lang_title:'語言證書',
+    skills_label:'工具技能', skills_title:'技能與工具', skills_analytics:'分析 & 商業智慧', skills_project:'專案 & CRM', skills_core:'核心專業', skills_languages:'語言能力', skills_beyond:'生活興趣',
+    lang_zh_name:'繁體中文／普通話', lang_zh_level:'母語', lang_en_name:'英文', lang_en_level:'專業流利（IELTS 7.5）', lang_es_name:'西班牙文', lang_es_level:'初級（A2）',
+    contact_label:'保持聯繫', contact_title:'聯絡我', contact_desc:'歡迎洽詢顧問委託、自由接案或任何合作機會。',
+    contact_email_label:'電子郵件', contact_li_label:'LinkedIn', contact_loc_label:'地點', contact_loc_val:'馬德里，西班牙・可遠端合作', contact_phone_label:'電話',
+    chatbot_cta_title:'💬 有問題嗎？', chatbot_cta_desc:'可使用右下角的 AI 對話框隨時詢問我的背景、技能或合作方式——24/7 全天候服務。',
+    form_name:'姓名', form_company:'公司', form_email:'電子郵件', form_type:'合作類型', form_msg:'訊息內容', form_send:'送出訊息', form_ok_title:'訊息已送出！', form_ok_desc:'我會在 1–2 個工作天內回覆您。',
+    footer_copy:'© 2026 曾穎翔（Sean Tzeng）· 馬德里，西班牙',
+    chat_status:'線上 · 歡迎提問', chat_placeholder:'詢問關於 Sean 的問題…',
+  },
+  es: {
+    nav_services:'Servicios', nav_experience:'Experiencia', nav_projects:'Proyectos', nav_education:'Formación', nav_contact:'Contacto', nav_hire:'Contrátame',
+    badge_open:'Disponible', badge_location:'📍 Madrid, España', badge_remote:'🌐 Trabajo Remoto',
+    hero_line1:'Consultor &', hero_line2:'Director de Proyectos',
+    hero_desc:'Estudiante de MSc en <strong class="text-slate-700">ESCP Business School</strong> (Madrid). Ayudo a las organizaciones a convertir la estrategia en acción — desde GTM hasta transformación digital con IA.',
+    hero_cta1:'Ver Proyectos', hero_cta2:'Contáctame',
+    stat1_label:'Años de Experiencia<br/>en Proyectos', stat2_label:'Proyectos de<br/>Consultoría', stat3_label:'Empresas<br/>Colaboradas', stat4_label:'Industrias<br/>Cubiertas', stat5_label:'Clientes de<br/><span class="font-semibold text-slate-600">APAC · EMEA · AMER</span>',
+    scroll_hint:'Desplázate para explorar',
+    svc_label:'Lo Que Ofrezco', svc_title:'Servicios', svc_desc:'Conectando estrategia y ejecución en cuatro áreas clave de práctica.',
+    svc1_title:'Estrategia GTM y de Negocio', svc1_desc:'Definición de ICP, planificación GTM, posicionamiento competitivo y modelado financiero.',
+    svc2_title:'Análisis de Datos e Informes', svc2_desc:'Dashboards Power BI y Tableau, seguimiento de KPIs, síntesis de investigación de mercado.',
+    svc3_title:'IA y Transformación Digital', svc3_desc:'Estrategia de agentes IA, planes de automatización de flujos y hojas de ruta tecnológicas.',
+    svc4_title:'Gestión de Proyectos', svc4_desc:'Coordinación multifuncional, gestión de pipelines CRM, entrega con Jira/Gantter.',
+    exp_label:"Dónde He Trabajado", exp_title:'Experiencia Laboral', exp_other_title:'Otras Actividades',
+    proj_label:'Trabajo de Consultoría', proj_title:'Proyectos', proj_desc:'Mandatos reales de consultoría en ESCP Business School con clientes reales.', proj_read:'Leer más →',
+    edu_label:'Formación Académica', edu_title:'Educación', edu_lang_title:'Certificaciones de Idiomas',
+    skills_label:'Herramientas', skills_title:'Habilidades y Herramientas', skills_analytics:'Análisis & BI', skills_project:'Proyectos & CRM', skills_core:'Expertise Principal', skills_languages:'Idiomas', skills_beyond:'Fuera del Trabajo',
+    lang_zh_name:'Chino Mandarín', lang_zh_level:'Nativo', lang_en_name:'Inglés', lang_en_level:'Profesional (IELTS 7.5)', lang_es_name:'Español', lang_es_level:'Principiante (A2)',
+    contact_label:'Conectémonos', contact_title:'Contáctame', contact_desc:'Abierto a mandatos de consultoría, proyectos freelance y oportunidades de colaboración.',
+    contact_email_label:'Email', contact_li_label:'LinkedIn', contact_loc_label:'Ubicación', contact_loc_val:'Madrid, España · Trabajo Remoto Disponible', contact_phone_label:'Teléfono',
+    chatbot_cta_title:'💬 ¿Tienes alguna pregunta?', chatbot_cta_desc:'Usa el chat AI (abajo a la derecha) para preguntar sobre mi experiencia, habilidades o disponibilidad — disponible 24/7.',
+    form_name:'Nombre', form_company:'Empresa', form_email:'Email', form_type:'Tipo de Colaboración', form_msg:'Mensaje', form_send:'Enviar Mensaje', form_ok_title:'¡Mensaje enviado!', form_ok_desc:'Te responderé en 1–2 días hábiles.',
+    footer_copy:'© 2026 Ying-Shiang (Sean) Tzeng · Madrid, España',
+    chat_status:'En línea · Pregúntame lo que quieras', chat_placeholder:'Pregunta sobre Sean…',
+  }
+};
+
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : lang;
+  ['en','zh','es'].forEach(l => document.getElementById('btn-'+l).classList.toggle('active', l === lang));
+  const t = T[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => { if(t[el.dataset.i18n] !== undefined) el.textContent = t[el.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { if(t[el.dataset.i18nHtml] !== undefined) el.innerHTML = t[el.dataset.i18nHtml]; });
+  document.getElementById('chat-input').placeholder = t.chat_placeholder;
+  document.getElementById('chat-status').innerHTML = `<span class="status-dot"></span> ${t.chat_status}`;
+}
+
+/* ══════════════════ CHATBOT ══════════════════ */
+const KB = [
+  { k:['who','about','sean','yourself','introduce','background','tell me'], a:"Hi! I'm Sean's AI assistant 👋\n\n**Ying-Shiang (Sean) Tzeng** is a consultant and project manager currently pursuing his **MSc in Digital Project Management & Consulting at ESCP Business School** (Madrid, GPA 3.8/4.0 — Top 4 EU business school per FT).\n\nHe specialises in GTM strategy, AI & digital transformation, data analytics, and project management. He's worked at Superlaty, Ipsos, and BenQ, and has completed live consulting mandates for Inditex, Salesforce/EasyFly, Telefónica, and MedRen." },
+  { k:['escp','msc','master','degree','business school','academic','education','gpa','study'], a:"Sean is studying at **ESCP Business School** in Madrid — **Top 4 European Business School** per the Financial Times 🎓\n\n**Programme:** MSc in Digital Project Management & Consulting\n**Duration:** Sep 2025 – Dec 2026 | **GPA:** 3.8 / 4.0\n\n**Highlights:**\n• Silicon Valley Seminar — Salesforce, UC Berkeley & Stanford\n• AWS Madrid Visit (Selected, Top 25 from cohort)\n• ESCP–Sussex Virtual Collaboration Certificate (Dec 2025)\n• Thesis: *How AI Reshapes Tasks, Talent Strategy & Skill Priorities for Junior Consultants*" },
+  { k:['superlaty','project manager','pm','startup','blockchain','pipeline','leads'], a:"At **Superlaty** (Taipei), Sean was a **Junior Project Manager** (Sep 2024 – Jun 2025):\n\n• Scoped ICPs and blockchain membership use cases across 3 industries for GTM prioritisation\n• Built and managed a **Salesforce pipeline of 250 qualified leads and 30+ active opportunities** across Taiwan, Singapore & Malaysia\n• Developed 5 core GTM materials and coordinated cross-functional stakeholders" },
+  { k:['ipsos','consulting intern','market research','healthcare','power bi','survey','kpi'], a:"At **Ipsos** (Taipei), Sean was a **Strategic Consulting Intern** (Sep 2024 – Mar 2025):\n\n• Structured survey frameworks and consolidated **4–6 data sources covering 10,000+ responses**\n• Built an Excel and **Power BI model** for bi-weekly KPI tracking and multi-wave reporting\n• Synthesised insights across 5+ healthcare market segments into client-ready reports" },
+  { k:['benq','marketing intern','kol','influencer','esports','gaming','campaign','270','views'], a:"At **BenQ** (Taipei), Sean was a **Digital Marketing Intern** (Nov 2023 – May 2024):\n\n• Executed US/UK KOL campaigns for gaming monitors\n• **Top result: 270,071 views, ~150 purchases, 66% engagement, 960 link clicks**\n• Managed pipeline via Salesforce CRM, UTM tracking, Google Analytics\n• Led 5+ esports marketing projects" },
+  { k:['inditex','ai agent','in-store','retail','zara'], a:"**Inditex — AI Agent Strategy for In-Store Operations** (Apr–Jun 2026)\n\nSean developed AI agent recommendations for Inditex's global retail in-store decision-making, including a full implementation blueprint covering priority use cases, tools, architecture, and API requirements across key operational data sources." },
+  { k:['salesforce','easyfly','airline','agentforce','digital transformation','147','churn'], a:"**Salesforce × EasyFly — Digital Transformation Strategy** (Jan–Mar 2026)\n\n• Multi-agent Agentforce architecture across the full passenger journey\n• **Financial model: €147M (+18%) operating profit uplift**\n• 12-month phased roadmap across 5 Salesforce clouds\n• **Projected ROI: 12.4× on €10–12M Year-1 investment**" },
+  { k:['telefonica','open gateway','api','fraud','gtm'], a:"**Telefónica — Open Gateway GTM Strategy** (Oct–Dec 2025)\n\n• 3 use cases: identity fraud, payment fraud, carrier billing / location-based revenue\n• Risk-tiered API recommendation framework per passenger journey touchpoint\n• B2B pricing model benchmarked vs Google Maps, Stripe, Adyen\n• Revenue model: 20% of fraud-saved value as Telefónica revenue" },
+  { k:['medren','private equity','pe','automation','tokenisation','energy','fund'], a:"**MedRen — GP Operations Automation** (Mar–Jul 2026)\n\n• Mapped end-to-end GP workflow to find automation opportunities\n• Assessed tokenisation feasibility for fund assets and LP interests\n• Delivered a prioritised roadmap with effort-impact matrix" },
+  { k:['skills','tools','power bi','tableau','jira','salesforce','excel','technical','software'], a:"Sean's technical toolkit:\n\n**Analytics & BI:** Power BI, Tableau, Google Analytics, Excel (Advanced)\n**Project & CRM:** Salesforce CRM, Jira, Gantter, MS Office\n**Core:** GTM Strategy, Market Research, AI Strategy, Digital Transformation, Financial Modelling\n**Languages:** Mandarin (Native), English (IELTS 7.5 / TOEIC 940), Spanish (A2)" },
+  { k:['contact','hire','email','work together','available','reach','collaborate','freelance'], a:"Sean is **open to consulting mandates, freelance projects, and collaborations!**\n\n📧 stzeng2010@gmail.com\n💼 linkedin.com/in/yingshiang-tzeng\n📍 Madrid, Spain (remote friendly)\n📞 (+34) 610-830-326\n\nOr use the contact form on this page — he replies within 1–2 business days." },
+  { k:['service','offer','what can','what do you'], a:"Sean's four service areas:\n\n🎯 **GTM & Business Strategy** — ICP scoping, go-to-market, competitive positioning\n📊 **Data Analytics** — Power BI/Tableau dashboards, KPI tracking, market research\n🤖 **AI & Digital Transformation** — AI agent strategy, workflow automation, tech roadmaps\n🛠️ **Project Management** — Cross-functional coordination, CRM pipeline, Jira delivery" },
+  { k:['language','english','mandarin','chinese','spanish','ielts','toeic'], a:"Sean is trilingual:\n🇹🇼 **Mandarin** — Native\n🇬🇧 **English** — Professional (IELTS 7.5 / TOEIC 940)\n🇪🇸 **Spanish** — Beginner (A2, improving in Madrid)" },
+  { k:['thesis','research','junior consultant','ai reshapes'], a:"Sean's MSc thesis (in progress):\n\n**\"How AI Reshapes Tasks, Talent Strategy, and Skill Priorities for Junior Consultants\"**\n\nExplores how AI tools are transforming what consulting firms expect from junior talent, informed by his hands-on AI strategy projects at ESCP." },
+  { k:['hobby','interest','sport','surf','football','draw','backpack','fun'], a:"Beyond work:\n🏄 **Surfing**\n⚽ **Football** — Former Taiwan U15–U18 national team player, university team captain (UFA 4th place)\n🎒 **Backpacking**\n✏️ **Drawing**" },
+  { k:['location','madrid','spain','taiwan','remote','where','based'], a:"Sean is based in **Madrid, Spain** 🇪🇸 (studying at ESCP). Originally from **Taipei, Taiwan** 🇹🇼. Available for **remote collaboration** globally." },
+  { k:['silicon valley','aws','berkeley','stanford'], a:"During his MSc, Sean participated in two selective programmes:\n\n• **Silicon Valley Seminar** — workshops at Salesforce, UC Berkeley & Stanford (selected students only)\n• **AWS Madrid Visit** — Top 25 selection from cohort for AI-focused site visit & workshops" },
+];
+
+const QUICK_CHIPS = [
+  {l:'Who is Sean?',q:'Tell me about Sean'},
+  {l:'ESCP Education',q:'Tell me about ESCP'},
+  {l:'Work experience',q:'What work experience does he have?'},
+  {l:'Consulting projects',q:'What consulting projects has he done?'},
+  {l:'Skills & tools',q:'What are his skills and tools?'},
+  {l:'Hire Sean',q:'How can I hire Sean?'},
+];
+
+let chatOpen = false, greetingShown = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-window').classList.toggle('open', chatOpen);
+  if (chatOpen && !greetingShown) {
+    greetingShown = true;
+    document.getElementById('chat-badge').style.display = 'none';
+    addBotMsg("Hi! 👋 I'm Sean's AI assistant. Ask me anything about his background, experience, projects, or how to work with him.");
+    renderChips();
+  }
+}
+
+function renderChips() {
+  document.getElementById('quick-chips').innerHTML = QUICK_CHIPS.map(c => `<span class="chip" onclick="sendQuick('${c.q}')">${c.l}</span>`).join('');
+}
+
+function sendQuick(q) {
+  document.getElementById('quick-chips').innerHTML = '';
+  addUserMsg(q);
+  setTimeout(() => addBotMsg(findAnswer(q)), 750);
+}
+
+function addUserMsg(text) {
+  const b = document.getElementById('chat-body');
+  const d = document.createElement('div');
+  d.className = 'msg user'; d.textContent = text;
+  b.appendChild(d); b.scrollTop = b.scrollHeight;
+}
+
+function addBotMsg(text) {
+  const b = document.getElementById('chat-body');
+  const dots = document.createElement('div');
+  dots.className = 'typing-dots';
+  dots.innerHTML = '<span></span><span></span><span></span>';
+  b.appendChild(dots); b.scrollTop = b.scrollHeight;
+  setTimeout(() => {
+    dots.remove();
+    const d = document.createElement('div');
+    d.className = 'msg bot';
+    d.innerHTML = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/\n/g,'<br/>');
+    b.appendChild(d); b.scrollTop = b.scrollHeight;
+  }, 900);
+}
+
+function findAnswer(input) {
+  const lower = input.toLowerCase();
+  let best = null, bestScore = 0;
+  for (const item of KB) {
+    let score = 0;
+    for (const k of item.k) { if (lower.includes(k)) score += k.length; }
+    if (score > bestScore) { bestScore = score; best = item; }
+  }
+  return best && bestScore > 0 ? best.a : "I don't have a specific answer for that. Please reach out directly at **stzeng2010@gmail.com** or via **LinkedIn** — Sean will reply within 1–2 business days! 😊";
+}
+
+function sendMsg() {
+  const inp = document.getElementById('chat-input');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  document.getElementById('quick-chips').innerHTML = '';
+  addUserMsg(text);
+  setTimeout(() => addBotMsg(findAnswer(text)), 750);
+}
+</script>
+</body>
+</html>
